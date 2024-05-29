@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "14399025694",
+    "project_id": "fare-payment-system",
+    "storage_bucket": "fare-payment-system.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:14399025694:android:a8c30fcc58cea39454b40f",
+        "android_client_info": {
+          "package_name": "com.example.authenticationapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBkKSLQNLZlsyITpaxI2a3Z5SXHZrej-3Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:14399025694:android:d89d984f0a3b244154b40f",
+        "android_client_info": {
+          "package_name": "com.example.fare_payment_system"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBkKSLQNLZlsyITpaxI2a3Z5SXHZrej-3Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
