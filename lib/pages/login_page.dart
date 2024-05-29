@@ -14,114 +14,165 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   // text editing controllers
   final emailController = TextEditingController();
-
   final passwordController = TextEditingController();
 
   // sign user in
   void signUserIn() async {
+    // Show loading circle
+    showDialog(
+      context: context,
+      barrierDismissible: false, // Prevent dismiss by tapping outside
+      builder: (context) {
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
+      },
+    );
 
-    //loading circle
-       showDialog(
-        context : context, 
-        builder : (context)
-        {
-          return  Center( 
-            child: CircularProgressIndicator()
-            ) ;
-          
-        },
-       );
+    // Try sign in
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: emailController.text,
         password: passwordController.text,
       );
-       }on FirebaseAuthException catch (e){
-          if (e.code == 'user-not-found') {
-            //show error to user 
-        print( 'No user found for that email.');
-      } else if (e.code == 'wrong-password') {
-        //show 
-        print( 'Wrong password!');
-      } else {
-        print('An error occurred. Please try again.');
+      // Pop the loading circle
+      Navigator.pop(context);
+    } on FirebaseAuthException catch (e) {
+      // Pop the loading circle
+      Navigator.pop(context);
+      print('FirebaseAuthException caught: ${e.code}');
+      // WRONG EMAIL
+      if (e.code == 'user-not-found') {
+        print('User not found');
+        // Show error to user
+        wrongEmailMessage();
       }
 
-        
-       }
+      // WRONG PASSWORD
+      else if (e.code == 'wrong-password') {
+        print('Wrong password');
+        // Show error to user
+        wrongPasswordMessage();
+      } else {
+        print('Unknown error: ${e.message}');
+        // Show general error message
+        showGeneralErrorMessage(e.message);
+      }
+    } catch (e) {
+      // Pop the loading circle in case of any other errors
       Navigator.pop(context);
-
+      print('General exception caught: $e');
+      // Show a general error message
+      showGeneralErrorMessage(e.toString());
+    }
   }
- void wrongEmailMessage() {
-  showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return AlertDialog(
-        title: Text('Incorrect Email'),
-        content: Text('Please enter a valid email address.'),
-        actions: <Widget>[
-          TextButton(
-            child: Text('OK'),
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
+
+  // Wrong email message popup
+  void wrongEmailMessage() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return const AlertDialog(
+          backgroundColor: Colors.deepPurple,
+          title: Center(
+            child: Text(
+              'Incorrect Email',
+              style: TextStyle(color: Colors.white),
+            ),
           ),
-        ],
-      );
-    },
-  );
-}
+        );
+      },
+    );
+  }
+
+  // Wrong password message popup
+  void wrongPasswordMessage() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return const AlertDialog(
+          backgroundColor: Colors.deepPurple,
+          title: Center(
+            child: Text(
+              'Incorrect Password',
+              style: TextStyle(color: Colors.white),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  // General error message popup
+  void showGeneralErrorMessage(String? message) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          backgroundColor: Color.fromARGB(255, 8, 2, 19),
+          title: const Center(
+            child: Text(
+              'Error',
+              style: TextStyle(color: Colors.white),
+            ),
+          ),
+          content: Text(
+            message ?? 'An unknown error occurred.',
+            style: const TextStyle(color: Colors.white),
+          ),
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 188, 194, 197),
+      backgroundColor: const Color.fromARGB(255, 188, 194, 197),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Center(
             child: Column(
               children: [
-                SizedBox(height: 50),
-                Icon(
-                  // logo
+                const SizedBox(height: 50),
+                const Icon(
                   Icons.lock,
                   size: 100,
                 ),
-                SizedBox(height: 50),
+                const SizedBox(height: 50),
 
-                // welcome back
-                Text(
+                // Welcome back
+                const Text(
                   'Welcome back',
                   style: TextStyle(
                     color: Colors.black45,
                     fontSize: 16,
                   ),
                 ),
-                SizedBox(height: 25),
+                const SizedBox(height: 25),
 
-                // username textfield
+                // Username textfield
                 MyTextfield(
                   controller: emailController,
                   hintText: 'Email',
                   obscureTest: false,
                 ),
+                const SizedBox(height: 10),
 
-                SizedBox(height: 10),
-
-                // password textfield
+                // Password textfield
                 MyTextfield(
                   controller: passwordController,
                   hintText: 'Password',
                   obscureTest: true,
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
 
-                // forgot password
+                // Forgot password
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
+                    children: const [
                       Text(
                         'Forgot password?',
                         style: TextStyle(color: Colors.black45),
@@ -129,15 +180,15 @@ class _LoginPageState extends State<LoginPage> {
                     ],
                   ),
                 ),
-                SizedBox(height: 25),
+                const SizedBox(height: 25),
 
-                // sign in button
+                // Sign in button
                 MyButton(
                   onTap: signUserIn,
                 ),
-                SizedBox(height: 50),
+                const SizedBox(height: 50),
 
-                // continue with
+                // Continue with
                 Row(
                   children: [
                     Expanded(
@@ -146,7 +197,7 @@ class _LoginPageState extends State<LoginPage> {
                         color: Colors.grey[400],
                       ),
                     ),
-                    Text('Or continue with'),
+                    const Text('Or continue with'),
                     Expanded(
                       child: Divider(
                         thickness: 5,
@@ -156,25 +207,24 @@ class _LoginPageState extends State<LoginPage> {
                   ],
                 ),
                 const SizedBox(height: 50),
-                // google + apple sign in buttons
+                // Google + Apple sign in buttons
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    //google button
+                    // Google button
                     SquareTile(imagepath: 'lib/images/google.png'),
-
                     const SizedBox(width: 15),
-                    //apple button
+                    // Apple button
                     SquareTile(imagepath: 'lib/images/apple.png'),
                   ],
                 ),
                 const SizedBox(height: 50),
-                // not a member? register now
+                // Not a member? Register now
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
+                  children: const [
                     Text('Not a member?'),
-                    const SizedBox(width: 4),
+                    SizedBox(width: 4),
                     Text(
                       'Register now',
                       style: TextStyle(
