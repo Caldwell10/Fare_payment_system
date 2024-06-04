@@ -1,4 +1,5 @@
 import 'package:fare_payment_system/pages/home_page.dart';
+import 'package:fare_payment_system/pages/login_or_register_page.dart';
 import 'package:fare_payment_system/pages/login_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -17,9 +18,10 @@ class AuthPage extends StatelessWidget {
             return HomePage();
            }
 
-           //user os not logged in
-
-           return LoginPage();
+           //user of not logged in
+          else{
+           return LoginOrRegisterPage();
+          }
       },
     ),
     );

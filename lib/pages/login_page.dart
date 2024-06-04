@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class LoginPage extends StatefulWidget {
-  LoginPage({super.key});
+  Function()? onTap;
+  LoginPage({super.key,this.onTap});
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -154,7 +155,7 @@ class _LoginPageState extends State<LoginPage> {
                 // Username textfield
                 MyTextfield(
                   controller: emailController,
-                  hintText: 'Email',
+                  hintText: 'Phone',
                   obscureTest: false,
                 ),
                 const SizedBox(height: 10),
@@ -185,6 +186,7 @@ class _LoginPageState extends State<LoginPage> {
                 // Sign in button
                 MyButton(
                   onTap: signUserIn,
+                  text:'Sign In'
                 ),
                 const SizedBox(height: 50),
 
@@ -218,18 +220,21 @@ class _LoginPageState extends State<LoginPage> {
                     SquareTile(imagepath: 'lib/images/apple.png'),
                   ],
                 ),
-                const SizedBox(height: 50),
+                const SizedBox(height: 100),
                 // Not a member? Register now
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
+                  children: [
                     Text('Not a member?'),
                     SizedBox(width: 4),
-                    Text(
-                      'Register now',
-                      style: TextStyle(
-                        color: Colors.blue,
-                        fontWeight: FontWeight.bold,
+                    GestureDetector(
+                      onTap: widget.onTap,
+                      child: Text(
+                        'Register now',
+                        style: TextStyle(
+                          color: Colors.blue,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   ],
