@@ -1,12 +1,11 @@
-import 'package:fare_payment_system/pages/home_page.dart';
 import 'package:flutter/material.dart';
-import 'package:fare_payment_system/components/my_button.dart';
-import 'package:fare_payment_system/components/my_textfield.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'home_page.dart'; // Import the HomePage
+import 'package:fare_payment_system/controllers/phone_authentication.dart'; // Import PhoneAuthentication
 
 class OtpVerificationPage extends StatefulWidget {
   final String verificationId;
-  
+
   OtpVerificationPage({Key? key, required this.verificationId}) : super(key: key);
 
   @override
@@ -15,37 +14,34 @@ class OtpVerificationPage extends StatefulWidget {
 
 class _OtpVerificationPageState extends State<OtpVerificationPage> {
   final codeController = TextEditingController();
+  final PhoneAuthentication phoneAuth = PhoneAuthentication();
 
   void verifyOTP() async {
-    try {
-      // Create a PhoneAuthCredential with the code
-      PhoneAuthCredential credential = PhoneAuthProvider.credential(
-        verificationId: widget.verificationId,
-        smsCode: codeController.text,
+    String otp = codeController.text.trim();
+    String result = await phoneAuth.verifyOTPCode(
+      verifyId: widget.verificationId,
+      otp: otp,
+    );
+
+    if (result == 'success') {
+      print("OTP verified successfully, navigating to HomePage"); // Debug statement
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => HomePage()),
       );
-
-      // Sign in the user with the credential
-      final UserCredential userCredential = await FirebaseAuth.instance.signInWithCredential(credential);
-
-      if (userCredential.user != null) {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => HomePage()), // Navigate to HomeScreen or another appropriate screen
-        );
-      }
-    } catch (e) {
+    } else {
+      print("OTP verification failed: $result"); // Debug statement
+      // Handle error
       showDialog(
         context: context,
-        builder: (BuildContext context) {
+        builder: (context) {
           return AlertDialog(
-            title: Text("Error"),
-            content: Text("Failed to verify OTP: ${e.toString()}"),
-            actions: <Widget>[
+            title: Text('Error'),
+            content: Text('Failed to verify OTP. Please try again.'),
+            actions: [
               TextButton(
-                child: Text("OK"),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
+                onPressed: () => Navigator.of(context).pop(),
+                child: Text('OK'),
               ),
             ],
           );
@@ -57,33 +53,53 @@ class _OtpVerificationPageState extends State<OtpVerificationPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 188, 194, 197),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Center(
-            child: Column(
-              children: [
-                const SizedBox(height: 50),
-                const Icon(Icons.lock, size: 100),
-                const SizedBox(height: 50),
-                const Text(
-                  'Enter the OTP sent to your phone',
-                  style: TextStyle(color: Colors.black45, fontSize: 16),
+      appBar: AppBar(
+        title: Text('OTP Verification'),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'Enter the OTP sent to your phone',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
                 ),
-                const SizedBox(height: 25),
-                MyTextfield(
-                  controller: codeController,
-                  hintText: 'OTP Code',
-                  obscureTest: false,
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(height: 20),
+              TextField(
+                controller: codeController,
+                decoration: InputDecoration(
+                  labelText: 'OTP Code',
+                  border: OutlineInputBorder(),
+                  prefixIcon: Icon(Icons.security),
                 ),
-                const SizedBox(height: 10),
-                MyButton(
-                  onTap: verifyOTP,
-                  text: 'Verify and Register',
+                keyboardType: TextInputType.number,
+              ),
+              SizedBox(height: 20),
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: verifyOTP,
+                  child: Text('Verify'),
+                  style: ElevatedButton.styleFrom(
+                    padding: EdgeInsets.symmetric(vertical: 16.0),
+                    textStyle: TextStyle(fontSize: 18),
+                  ),
                 ),
-                const SizedBox(height: 50),
-              ],
-            ),
+              ),
+              SizedBox(height: 20),
+              TextButton(
+                onPressed: () {
+                  // Resend OTP functionality here
+                },
+                child: Text('Didn\'t receive OTP? Resend'),
+              ),
+            ],
           ),
         ),
       ),

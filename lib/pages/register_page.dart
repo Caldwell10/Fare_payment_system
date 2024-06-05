@@ -87,7 +87,24 @@ class _RegisterPageState extends State<RegisterPage> {
                   },
                   text: 'Register',
                 ),
-                // Other widgets as needed
+                const SizedBox(height: 100),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text('Already a member?'),
+                    const SizedBox(width: 4),
+                    GestureDetector(
+                      onTap: widget.onTap,
+                      child: const Text(
+                        'Login here',
+                        style: TextStyle(
+                          color: Colors.blue,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ],
             ),
           ),

@@ -61,11 +61,13 @@ class PhoneAuthentication {
   // Store phone number
   Future<void> storeNumber(String phoneNo) async {
     try {
+      print("Storing phone number: $phoneNo"); // Debug statement
       await _firestore.collection('users').doc(phoneNo).set({
         'phoneNumber': phoneNo,
       });
+      print("Phone number $phoneNo stored successfully"); // Debug statement
     } catch (e) {
-      e.toString();
+      print("Error storing phone number: $e"); // Debug statement
     }
   }
 }

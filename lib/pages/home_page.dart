@@ -1,5 +1,11 @@
+import 'package:fare_payment_system/passenger_view/payment_page.dart';
+import 'package:fare_payment_system/passenger_view/routes_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+
+import '../passenger_view/customer_support_page.dart';
+import '../passenger_view/fare_calculation_page.dart';
+import '../passenger_view/select_seat_page.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({super.key});
@@ -29,7 +35,8 @@ class HomePage extends StatelessWidget {
           ),
         ],
       ),
-      body: GridView.count(
+      body: 
+      GridView.count(
         crossAxisCount: 2,
         padding: const EdgeInsets.all(16.0),
         children: [
@@ -68,52 +75,7 @@ class HomePage extends StatelessWidget {
   }
 }
 
-class RoutesPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text('Routes')),
-      body: Center(child: Text('Routes Page')),
-    );
-  }
-}
 
-class SelectSeatPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text('Select Seat')),
-      body: Center(child: Text('Select Seat Page')),
-    );
-  }
-}
 
-class FareCalculationPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text('Fare Calculation')),
-      body: Center(child: Text('Fare Calculation Page')),
-    );
-  }
-}
 
-class PaymentPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text('Payment')),
-      body: Center(child: Text('Payment Page')),
-    );
-  }
-}
 
-class CustomerSupportPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text('Customer Support')),
-      body: Center(child: Text('Customer Support Page')),
-    );
-  }
-}
