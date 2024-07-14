@@ -34,6 +34,8 @@ class _CreateRoutesPageState extends State<CreateRoutePage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Routing', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+         backgroundColor: const Color.fromARGB(255, 108, 105, 105),
+        foregroundColor: Colors.white,
       ),
       body: SafeArea(
         child: Padding(
