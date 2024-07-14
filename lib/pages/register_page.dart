@@ -1,4 +1,4 @@
-import 'package:fare_payment_system/controllers/phone_Authentication.dart';
+import 'package:fare_payment_system/controllers/phone_authentication.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'otp_verification_page.dart';
@@ -18,14 +18,15 @@ class _RegisterPageState extends State<RegisterPage> {
 
   void sendOTP() async {
     print("sendOTP called"); // Debug statement
+    String phoneNumber = '+254${phoneController.text.trim()}'; // Correctly format the phone number
     await PhoneAuthentication().sendOTPCode(
-      phoneController.text,
+      phoneNumber,
       (String verId) async {
         print("OTP sent, navigating to verification page with verId: $verId"); // Debug statement
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => OtpVerificationPage(verificationId: verId),
+            builder: (context) => OtpVerificationPage(verificationId: verId, phoneNumber: phoneNumber),
           ),
         );
       },
@@ -67,7 +68,10 @@ class _RegisterPageState extends State<RegisterPage> {
             child: Column(
               children: [
                 const SizedBox(height: 50),
-                const Icon(Icons.lock, size: 100),
+                const Icon(
+                  Icons.app_registration_outlined,
+                  size: 100,
+                ),
                 const SizedBox(height: 50),
                 const Text(
                   'Enter phone number to register',
@@ -79,7 +83,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   hintText: 'Phone Number',
                   obscureTest: false,
                 ),
-                const SizedBox(height: 10),
+                const SizedBox(height: 30),
                 MyButton(
                   onTap: () {
                     print("Register button pressed"); // Debug statement
