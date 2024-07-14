@@ -8,10 +8,12 @@ class PhoneAuthentication {
   // Send OTP Code to Phone Number
   Future<void> sendOTPCode(String phoneNo, Function(String) onCodeSent, Function(dynamic) onError) async {
     try {
-      print("Sending OTP to +254$phoneNo"); // Debug statement
+      // Ensure the phone number is correctly formatted
+      final formattedPhoneNo = phoneNo.startsWith('+254') ? phoneNo : '+254$phoneNo';
+      print("Sending OTP to $formattedPhoneNo"); // Debug statement
       await _auth.verifyPhoneNumber(
         timeout: Duration(seconds: 40),
-        phoneNumber: '+254$phoneNo',
+        phoneNumber: formattedPhoneNo,
         verificationCompleted: (PhoneAuthCredential credential) {
           // Auto-resolving cases
           print("Verification completed with credential: $credential"); // Debug statement
@@ -61,7 +63,6 @@ class PhoneAuthentication {
   // Store phone number
   Future<void> storeNumber(String phoneNo) async {
     try {
-      print("Storing phone number: $phoneNo"); // Debug statement
       await _firestore.collection('users').doc(phoneNo).set({
         'phoneNumber': phoneNo,
       });
