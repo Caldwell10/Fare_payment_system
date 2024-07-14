@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'home_page.dart'; // Import the HomePage
-import 'package:fare_payment_system/controllers/phone_authentication.dart'; // Import PhoneAuthentication
+import 'home_page.dart'; 
+import 'package:fare_payment_system/controllers/phone_authentication.dart'; 
 
 class OtpVerificationPage extends StatefulWidget {
   final String verificationId;
+  final String phoneNumber;
 
-  OtpVerificationPage({Key? key, required this.verificationId}) : super(key: key);
+  OtpVerificationPage({Key? key, required this.verificationId, required this.phoneNumber}) : super(key: key);
 
   @override
   State<OtpVerificationPage> createState() => _OtpVerificationPageState();
@@ -27,7 +28,7 @@ class _OtpVerificationPageState extends State<OtpVerificationPage> {
       print("OTP verified successfully, navigating to HomePage"); // Debug statement
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => HomePage()),
+        MaterialPageRoute(builder: (context) => HomePage(phoneNumber: widget.phoneNumber)),
       );
     } else {
       print("OTP verification failed: $result"); // Debug statement
