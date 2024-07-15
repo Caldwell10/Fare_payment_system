@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'home_page.dart'; 
+import 'home_page.dart';
 import 'package:fare_payment_system/components/my_button.dart';
 import 'package:fare_payment_system/components/my_textfield.dart';
+import 'package:fare_payment_system/conductor_view/conductor_home_page.dart';
+import 'package:fare_payment_system/admin_view/admin_home_page.dart';
 
 class LoginPage extends StatefulWidget {
   final Function()? onTap;
@@ -28,16 +30,29 @@ class _LoginPageState extends State<LoginPage> {
       },
     );
 
-    // Check if the phone number exists in the database
     try {
       String phoneNumber = '+254${phoneController.text.trim()}';
       var userDoc = await FirebaseFirestore.instance.collection('users').doc(phoneNumber).get();
 
       if (userDoc.exists) {
-        // Navigate to HomePage
+        // Get user role
+        String role = userDoc['role'];
+
+        // Navigate to appropriate home page
+        Widget homePage;
+        if (role == 'passenger') {
+          homePage = HomePage(phoneNumber: phoneNumber);
+        } else if (role == 'conductor') {
+          homePage = ConductorHomePage();
+        } else if (role == 'admin') {
+          homePage = AdminHomePage();
+        } else {
+          homePage=HomePage(phoneNumber: phoneNumber);
+        }
+
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => HomePage()),
+          MaterialPageRoute(builder: (context) => homePage),
         );
       } else {
         Navigator.pop(context); // Remove the loading circle
@@ -81,12 +96,10 @@ class _LoginPageState extends State<LoginPage> {
               children: [
                 const SizedBox(height: 50),
                 const Icon(
-                  Icons.lock,
+                  Icons.account_circle,
                   size: 100,
                 ),
-                const SizedBox(height: 50),
-
-                // Welcome back
+                const SizedBox(height: 20),
                 const Text(
                   'Welcome back',
                   style: TextStyle(
@@ -94,7 +107,7 @@ class _LoginPageState extends State<LoginPage> {
                     fontSize: 16,
                   ),
                 ),
-                const SizedBox(height: 25),
+                const SizedBox(height: 50),
 
                 // Phone Number textfield
                 MyTextfield(
@@ -109,30 +122,8 @@ class _LoginPageState extends State<LoginPage> {
                   onTap: signUserIn,
                   text: 'Sign In',
                 ),
-                const SizedBox(height: 50),
+                const SizedBox(height: 100),
 
-                // Continue with
-                Row(
-                  children: [
-                    Expanded(
-                      child: Divider(
-                        thickness: 5,
-                        color: Colors.grey[400],
-                      ),
-                    ),
-                    const Text('Or continue with'),
-                    Expanded(
-                      child: Divider(
-                        thickness: 5,
-                        color: Colors.grey[400],
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 50),
-
-                // Google + Apple sign in buttons
-              
                 // Not a member? Register now
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
