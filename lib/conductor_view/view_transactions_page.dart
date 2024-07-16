@@ -10,7 +10,7 @@ class ViewTransactionsPage extends StatelessWidget {
       appBar: AppBar(
         title: Text('View Transactions'),
         backgroundColor: const Color.fromARGB(255, 108, 105, 105),
-        
+        foregroundColor: Colors.white,
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance.collection('matatus').snapshots(),
@@ -73,9 +73,13 @@ class ViewTransactionsPage extends StatelessWidget {
                       children: transactions.map((transactionDoc) {
                         final transaction = transactionDoc.data() as Map<String, dynamic>;
                         final amount = transaction['amount']?.toString() ?? 'No amount';
-                        final description = transaction['resultDesc'] ?? 'No description';
-                        final date = transaction['transactionDate'] ?? 'No date';
-                        final receiptNumber = transaction['mpesaReceiptNumber'] ?? 'No receipt number';
+                        final phoneNumber = transaction['phoneNumber'] ?? 'No phone number';
+                        final date = transaction['transactionDate'] != null
+                            ? (transaction['transactionDate'] as Timestamp).toDate().toString()
+                            : 'No date';
+                        final receiptNumber = transaction['receiptNumber'] ?? 'No receipt number';
+                        final startLocation = transaction['startLocation'] ?? 'No start location';
+                        final endLocation = transaction['endLocation'] ?? 'No end location';
 
                         return ListTile(
                           leading: Icon(Icons.receipt, size: 40.0, color: Colors.black),
@@ -87,9 +91,11 @@ class ViewTransactionsPage extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               SizedBox(height: 5.0),
-                              Text('Description: $description'),
+                              Text('Phone Number: $phoneNumber'),
                               Text('Date: $date'),
                               Text('Receipt Number: $receiptNumber'),
+                              Text('Start Location: $startLocation'),
+                              Text('End Location: $endLocation'),
                             ],
                           ),
                         );
@@ -102,7 +108,7 @@ class ViewTransactionsPage extends StatelessWidget {
           );
         },
       ),
-      backgroundColor: const Color.fromARGB(255, 236, 239, 241), // Background color to contrast with the cards
+      backgroundColor: const Color.fromARGB(255, 236, 239, 241),
     );
   }
 }
