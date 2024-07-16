@@ -96,7 +96,7 @@ class _CustomerSupportPageState extends State<CustomerSupportPage> {
             SizedBox(height: 20),
             TextField(
               controller: messageController,
-              style: TextStyle(color: Colors.black),  // Text color inside the TextField
+              style: TextStyle(color: Colors.black),  
               decoration: InputDecoration(
                 labelText: 'Message',
                 labelStyle: TextStyle(color: Colors.black),
