@@ -12,12 +12,32 @@ class _FareCalculationPageState extends State<FareCalculationPage> {
   double fare = 0.0;
 
   void _calculateFare() {
+    if (selectedStartLocation.isEmpty || selectedEndLocation.isEmpty) {
+      // Show an alert dialog if either location is not selected
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text('Error'),
+            content: Text('Please select both start and end locations.'),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(),
+                child: Text('OK'),
+              ),
+            ],
+          );
+        },
+      );
+      return;
+    }
+
     print('Selected Start Location: $selectedStartLocation');
     print('Selected End Location: $selectedEndLocation');
 
-    // Just set the fare to 50 for demonstration purposes
+    // For demonstration purposes, set the fare to 50
     setState(() {
-      fare = 50;
+      fare = 50.0;
     });
 
     print('Fare: $fare');
@@ -47,62 +67,50 @@ class _FareCalculationPageState extends State<FareCalculationPage> {
 
                   return Column(
                     children: [
-                      Row(
-                        children: [
-                          Expanded(
-                            child: DropdownButtonFormField(
-                              decoration: InputDecoration(
-                                labelText: 'Start Location',
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(8.0),
-                                ),
-                                prefixIcon: Icon(Icons.location_on),
-                              ),
-                              items: routes.map((route) {
-                                var data = route.data() as Map<String, dynamic>;
-                                return DropdownMenuItem(
-                                  value: route.id,
-                                  child: Text(data['startLocation'], overflow: TextOverflow.ellipsis),
-                                );
-                              }).toList(),
-                              onChanged: (value) {
-                                setState(() {
-                                  selectedStartLocation = value as String;
-                                });
-                              },
-                              value: selectedStartLocation.isEmpty ? null : selectedStartLocation,
-                            ),
+                      DropdownButtonFormField(
+                        decoration: InputDecoration(
+                          labelText: 'Start Location',
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8.0),
                           ),
-                        ],
+                          prefixIcon: Icon(Icons.location_on),
+                        ),
+                        items: routes.map((route) {
+                          var data = route.data() as Map<String, dynamic>;
+                          return DropdownMenuItem(
+                            value: data['startLocation'],
+                            child: Text(data['startLocation'], overflow: TextOverflow.ellipsis),
+                          );
+                        }).toList(),
+                        onChanged: (value) {
+                          setState(() {
+                            selectedStartLocation = value as String;
+                          });
+                        },
+                        value: selectedStartLocation.isEmpty ? null : selectedStartLocation,
                       ),
                       SizedBox(height: 20),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: DropdownButtonFormField(
-                              decoration: InputDecoration(
-                                labelText: 'End Location',
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(8.0),
-                                ),
-                                prefixIcon: Icon(Icons.location_on),
-                              ),
-                              items: routes.map((route) {
-                                var data = route.data() as Map<String, dynamic>;
-                                return DropdownMenuItem(
-                                  value: route.id,
-                                  child: Text(data['endLocation'], overflow: TextOverflow.ellipsis),
-                                );
-                              }).toList(),
-                              onChanged: (value) {
-                                setState(() {
-                                  selectedEndLocation = value as String;
-                                });
-                              },
-                              value: selectedEndLocation.isEmpty ? null : selectedEndLocation,
-                            ),
+                      DropdownButtonFormField(
+                        decoration: InputDecoration(
+                          labelText: 'End Location',
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8.0),
                           ),
-                        ],
+                          prefixIcon: Icon(Icons.location_on),
+                        ),
+                        items: routes.map((route) {
+                          var data = route.data() as Map<String, dynamic>;
+                          return DropdownMenuItem(
+                            value: data['endLocation'],
+                            child: Text(data['endLocation'], overflow: TextOverflow.ellipsis),
+                          );
+                        }).toList(),
+                        onChanged: (value) {
+                          setState(() {
+                            selectedEndLocation = value as String;
+                          });
+                        },
+                        value: selectedEndLocation.isEmpty ? null : selectedEndLocation,
                       ),
                     ],
                   );
@@ -141,7 +149,11 @@ class _FareCalculationPageState extends State<FareCalculationPage> {
                       SizedBox(height: 10),
                       Text(
                         '$fare',
-                        style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Color.fromARGB(255, 108, 105, 105)),
+                        style: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                          color: Color.fromARGB(255, 108, 105, 105),
+                        ),
                       ),
                     ],
                   ),
