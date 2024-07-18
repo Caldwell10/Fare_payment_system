@@ -22,6 +22,17 @@
 	<string>$(FLUTTER_BUILD_NAME)</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>app-1-14399025694-ios-3d887f601d6bcd2454b40f</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>app-1-14399025694-ios-3d887f601d6bcd2454b40f</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleVersion</key>
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>LSApplicationQueriesSchemes</key>
@@ -49,17 +60,6 @@
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
-	</array>
-	<key>CFBundleURLTypes</key>
-	<array>
-		<dict>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>app-1-14399025694-ios-3d887f601d6bcd2454b40f</string>
-			</array>
-			<key>CFBundleURLName</key>
-			<string>app-1-14399025694-ios-3d887f601d6bcd2454b40f</string>
-		</dict>
 	</array>
 </dict>
 </plist>

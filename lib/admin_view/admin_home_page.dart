@@ -16,7 +16,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Admin Home'),
+        title: Text('Farely'),
          foregroundColor: Colors.white,
         backgroundColor: Color.fromARGB(255, 108, 105, 105),
           
@@ -34,6 +34,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
       backgroundColor: const Color.fromARGB(255, 236, 239, 241), // Background color to contrast with the cards
     );
   }
+   
 
   Widget buildGridItem(BuildContext context, String title, IconData icon, Widget destinationPage) {
     return GestureDetector(

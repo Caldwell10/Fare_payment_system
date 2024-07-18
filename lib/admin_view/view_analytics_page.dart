@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -78,6 +80,7 @@ class ViewAnalyticsPage extends StatelessWidget {
                 Text(
                   'Analytics Overview',
                   style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+             
                 ),
                 SizedBox(height: 20),
                 Card(
