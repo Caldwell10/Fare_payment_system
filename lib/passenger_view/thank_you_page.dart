@@ -43,7 +43,7 @@ class ThankYouPage extends StatelessWidget {
                   foregroundColor: Colors.white,
                 ),
                 child: const Text('Go to Home'),
-              )
+              ),
             ],
           ),
         ),

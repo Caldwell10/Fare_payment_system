@@ -90,13 +90,13 @@ class _CustomerSupportPageState extends State<CustomerSupportPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Welcome  ${widget.phoneNumber}',
+              'Welcome, ${widget.phoneNumber}',
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.black),
             ),
             SizedBox(height: 20),
             TextField(
               controller: messageController,
-              style: TextStyle(color: Colors.black),  
+              style: TextStyle(color: Colors.black),
               decoration: InputDecoration(
                 labelText: 'Message',
                 labelStyle: TextStyle(color: Colors.black),
@@ -128,7 +128,7 @@ class _CustomerSupportPageState extends State<CustomerSupportPage> {
                     borderRadius: BorderRadius.circular(10.0),
                   ),
                   backgroundColor: Colors.black87,
-                  foregroundColor: Colors.white, 
+                  foregroundColor: Colors.white,
                 ),
                 child: Text('Submit Ticket'),
               ),
