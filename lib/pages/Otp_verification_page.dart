@@ -51,6 +51,11 @@ class _OtpVerificationPageState extends State<OtpVerificationPage> {
     }
   }
 
+  void resendOTP() {
+    // Add functionality to resend OTP here
+    print('Resend OTP functionality to be implemented');
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -89,15 +94,13 @@ class _OtpVerificationPageState extends State<OtpVerificationPage> {
                   child: Text('Verify'),
                   style: ElevatedButton.styleFrom(
                     padding: EdgeInsets.symmetric(vertical: 16.0),
-                    textStyle: TextStyle(fontSize: 18),
+                    textStyle: TextStyle(fontSize: 18,fontStyle: Null),
                   ),
                 ),
               ),
               SizedBox(height: 20),
               TextButton(
-                onPressed: () {
-                  // Resend OTP functionality here
-                },
+                onPressed: resendOTP,
                 child: Text('Didn\'t receive OTP? Resend'),
               ),
             ],

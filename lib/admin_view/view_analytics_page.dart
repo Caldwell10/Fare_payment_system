@@ -13,7 +13,7 @@ class ViewAnalyticsPage extends StatelessWidget {
 
     for (var doc in transactionsSnapshot.docs) {
       var data = doc.data() as Map<String, dynamic>;
-      String matatuId = data['matatuId'];
+      String matatuId = data['matatuId'] ?? 'Unknown';
       double amount = double.tryParse(data['amount'].toString()) ?? 0.0;
       String phoneNumber = data['phoneNumber'] ?? 'Unknown';
       Timestamp timestamp = data['timestamp'] ?? Timestamp.now();
@@ -80,7 +80,6 @@ class ViewAnalyticsPage extends StatelessWidget {
                 Text(
                   'Analytics Overview',
                   style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-             
                 ),
                 SizedBox(height: 20),
                 Card(

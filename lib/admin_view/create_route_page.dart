@@ -46,13 +46,13 @@ class _CreateRoutesPageState extends State<CreateRoutePage> {
         return;
       }
 
-      var v1 = startLocations[0].latitude;
-      var v2 = startLocations[0].longitude;
-      var v3 = endLocations[0].latitude;
-      var v4 = endLocations[0].longitude;
+      var startLatitude = startLocations[0].latitude;
+      var startLongitude = startLocations[0].longitude;
+      var endLatitude = endLocations[0].latitude;
+      var endLongitude = endLocations[0].longitude;
 
       var url = Uri.parse(
-          'http://router.project-osrm.org/route/v1/driving/$v2,$v1;$v4,$v3?steps=true&annotations=true&geometries=geojson&overview=full');
+          'http://router.project-osrm.org/route/v1/driving/$startLongitude,$startLatitude;$endLongitude,$endLatitude?steps=true&annotations=true&geometries=geojson&overview=full');
       var response = await http.get(url);
 
       if (!mounted) return;
@@ -112,7 +112,7 @@ class _CreateRoutesPageState extends State<CreateRoutePage> {
                 const SizedBox(height: 20),
                 ElevatedButton(
                   onPressed: getRoute,
-                  child: const Text('Press'),
+                  child: const Text('Get Route'),
                 ),
                 const SizedBox(height: 20),
                 if (isVisible)
