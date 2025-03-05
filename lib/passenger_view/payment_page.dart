@@ -10,6 +10,8 @@ import 'package:uuid/uuid.dart';
 import 'thank_you_page.dart';
 
 class PaymentPage extends StatefulWidget {
+  const PaymentPage({super.key});
+
   @override
   _PaymentPageState createState() => _PaymentPageState();
 }
@@ -38,7 +40,7 @@ class _PaymentPageState extends State<PaymentPage> {
 
     if (phoneNumber.isEmpty || amount.isEmpty || selectedMatatuId.isEmpty || selectedStartLocation.isEmpty || selectedEndLocation.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Please enter a phone number, amount, and select a matatu, start location, and end location')),
+        const SnackBar(content: Text('Please enter a phone number, amount, and select a matatu, start location, and end location')),
       );
       return;
     }
@@ -63,7 +65,7 @@ class _PaymentPageState extends State<PaymentPage> {
       );
 
       // Generate receipt number and transaction date
-      String receiptNumber = Uuid().v4();
+      String receiptNumber = const Uuid().v4();
       DateTime transactionDate = DateTime.now();
 
       await FirebaseFirestore.instance.collection('transactions').add({
@@ -94,7 +96,7 @@ class _PaymentPageState extends State<PaymentPage> {
   }
 
   void _listenForPaymentConfirmation(String transactionId) {
-    Future.delayed(Duration(seconds: 5), () {
+    Future.delayed(const Duration(seconds: 5), () {
       setState(() {
         isLoading = false;
       });
@@ -102,7 +104,7 @@ class _PaymentPageState extends State<PaymentPage> {
       // Navigate to ThankYouPage
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => ThankYouPage()),
+        MaterialPageRoute(builder: (context) => const ThankYouPage()),
       );
     });
   }
@@ -111,9 +113,9 @@ class _PaymentPageState extends State<PaymentPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Payment Page'),
+        title: const Text('Payment Page'),
         foregroundColor: Colors.white,
-        backgroundColor: Color.fromARGB(255, 108, 105, 105),
+        backgroundColor: const Color.fromARGB(255, 108, 105, 105),
       ),
       body: Stack(
         children: [
@@ -126,7 +128,7 @@ class _PaymentPageState extends State<PaymentPage> {
                     stream: FirebaseFirestore.instance.collection('matatus').snapshots(),
                     builder: (context, snapshot) {
                       if (!snapshot.hasData) {
-                        return Center(child: CircularProgressIndicator());
+                        return const Center(child: CircularProgressIndicator());
                       }
 
                       var matatus = snapshot.data!.docs;
@@ -140,7 +142,7 @@ class _PaymentPageState extends State<PaymentPage> {
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(8.0),
                                 ),
-                                prefixIcon: Icon(Icons.directions_bus),
+                                prefixIcon: const Icon(Icons.directions_bus),
                               ),
                               items: matatus.map((matatu) {
                                 return DropdownMenuItem(
@@ -161,12 +163,12 @@ class _PaymentPageState extends State<PaymentPage> {
                       );
                     },
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   StreamBuilder<QuerySnapshot>(
                     stream: FirebaseFirestore.instance.collection('routes').snapshots(),
                     builder: (context, snapshot) {
                       if (!snapshot.hasData) {
-                        return Center(child: CircularProgressIndicator());
+                        return const Center(child: CircularProgressIndicator());
                       }
 
                       var routes = snapshot.data!.docs;
@@ -182,7 +184,7 @@ class _PaymentPageState extends State<PaymentPage> {
                                     border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(8.0),
                                     ),
-                                    prefixIcon: Icon(Icons.location_on),
+                                    prefixIcon: const Icon(Icons.location_on),
                                   ),
                                   items: routes.where((route) {
                                     var data = route.data() as Map<String, dynamic>;
@@ -204,7 +206,7 @@ class _PaymentPageState extends State<PaymentPage> {
                               ),
                             ],
                           ),
-                          SizedBox(height: 20),
+                          const SizedBox(height: 20),
                           Row(
                             children: [
                               Expanded(
@@ -214,7 +216,7 @@ class _PaymentPageState extends State<PaymentPage> {
                                     border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(8.0),
                                     ),
-                                    prefixIcon: Icon(Icons.location_on),
+                                    prefixIcon: const Icon(Icons.location_on),
                                   ),
                                   items: routes.where((route) {
                                     var data = route.data() as Map<String, dynamic>;
@@ -240,31 +242,31 @@ class _PaymentPageState extends State<PaymentPage> {
                       );
                     },
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   MyTextfield(
                     controller: amountController,
                     hintText: 'Amount',
                     obscureTest: false,
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   MyTextfield(
                     controller: phoneController,
                     hintText: 'Phone Number',
                     obscureTest: false,
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   MyButton(
                     onTap: _initiatePayment,
                     text: 'Initiate Payment',
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   if (routePoints.isNotEmpty)
                     SizedBox(
                       height: 300,
                       width: double.infinity,
                       child: FlutterMap(
                         options: MapOptions(
-                          initialCenter: routePoints.isNotEmpty ? routePoints[0] : LatLng(-1.2921, 36.8219),
+                          initialCenter: routePoints.isNotEmpty ? routePoints[0] : const LatLng(-1.2921, 36.8219),
                           initialZoom: 14,
                         ),
                         children: [
@@ -287,7 +289,7 @@ class _PaymentPageState extends State<PaymentPage> {
           if (isLoading)
             Container( 
               color: Colors.black.withOpacity(0.5),
-              child: Center(
+              child: const Center(
                 child: CircularProgressIndicator(),
               ),
             ),

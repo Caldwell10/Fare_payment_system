@@ -12,7 +12,7 @@ class PhoneAuthentication {
       final formattedPhoneNo = phoneNo.startsWith('+254') ? phoneNo : '+254$phoneNo';
       print("Sending OTP to $formattedPhoneNo"); // Debug statement
       await _auth.verifyPhoneNumber(
-        timeout: Duration(seconds: 40),
+        timeout: const Duration(seconds: 40),
         phoneNumber: formattedPhoneNo,
         verificationCompleted: (PhoneAuthCredential credential) {
           // Auto-resolving cases

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'home_page.dart'; 
 import 'package:fare_payment_system/controllers/phone_authentication.dart'; 
 
@@ -7,7 +6,7 @@ class OtpVerificationPage extends StatefulWidget {
   final String verificationId;
   final String phoneNumber;
 
-  OtpVerificationPage({Key? key, required this.verificationId, required this.phoneNumber}) : super(key: key);
+  const OtpVerificationPage({super.key, required this.verificationId, required this.phoneNumber});
 
   @override
   State<OtpVerificationPage> createState() => _OtpVerificationPageState();
@@ -37,12 +36,12 @@ class _OtpVerificationPageState extends State<OtpVerificationPage> {
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: Text('Error'),
-            content: Text('Failed to verify OTP. Please try again.'),
+            title: const Text('Error'),
+            content: const Text('Failed to verify OTP. Please try again.'),
             actions: [
               TextButton(
                 onPressed: () => Navigator.of(context).pop(),
-                child: Text('OK'),
+                child: const Text('OK'),
               ),
             ],
           );
@@ -60,7 +59,7 @@ class _OtpVerificationPageState extends State<OtpVerificationPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('OTP Verification'),
+        title: const Text('OTP Verification'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -68,7 +67,7 @@ class _OtpVerificationPageState extends State<OtpVerificationPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
+              const Text(
                 'Enter the OTP sent to your phone',
                 style: TextStyle(
                   fontSize: 18,
@@ -76,32 +75,32 @@ class _OtpVerificationPageState extends State<OtpVerificationPage> {
                 ),
                 textAlign: TextAlign.center,
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               TextField(
                 controller: codeController,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'OTP Code',
                   border: OutlineInputBorder(),
                   prefixIcon: Icon(Icons.security),
                 ),
                 keyboardType: TextInputType.number,
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: verifyOTP,
-                  child: Text('Verify'),
                   style: ElevatedButton.styleFrom(
-                    padding: EdgeInsets.symmetric(vertical: 16.0),
-                    textStyle: TextStyle(fontSize: 18,fontStyle: Null),
+                    padding: const EdgeInsets.symmetric(vertical: 16.0),
+                    textStyle: const TextStyle(fontSize: 18,),
                   ),
+                  child: const Text('Verify'),
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               TextButton(
                 onPressed: resendOTP,
-                child: Text('Didn\'t receive OTP? Resend'),
+                child: const Text('Didn\'t receive OTP? Resend'),
               ),
             ],
           ),

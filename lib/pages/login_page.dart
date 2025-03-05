@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'home_page.dart';
 import 'package:fare_payment_system/components/my_button.dart';
@@ -9,7 +8,7 @@ import 'package:fare_payment_system/admin_view/admin_home_page.dart';
 
 class LoginPage extends StatefulWidget {
   final Function()? onTap;
-  LoginPage({super.key, this.onTap});
+  const LoginPage({super.key, this.onTap});
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -43,9 +42,9 @@ class _LoginPageState extends State<LoginPage> {
         if (role == 'passenger') {
           homePage = HomePage(phoneNumber: phoneNumber);
         } else if (role == 'conductor') {
-          homePage = ConductorHomePage();
+          homePage = const ConductorHomePage();
         } else if (role == 'admin') {
-          homePage = AdminHomePage();
+          homePage = const AdminHomePage();
         } else {
           homePage=HomePage(phoneNumber: phoneNumber);
         }
@@ -70,14 +69,14 @@ class _LoginPageState extends State<LoginPage> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: Text('Error'),
+          title: const Text('Error'),
           content: Text(message),
           actions: [
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: Text('OK'),
+              child: const Text('OK'),
             ),
           ],
         );

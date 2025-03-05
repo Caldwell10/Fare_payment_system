@@ -4,7 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class CustomerSupportPage extends StatefulWidget {
   final String phoneNumber;
 
-  CustomerSupportPage({super.key, required this.phoneNumber});
+  const CustomerSupportPage({super.key, required this.phoneNumber});
 
   @override
   _CustomerSupportPageState createState() => _CustomerSupportPageState();
@@ -33,14 +33,14 @@ class _CustomerSupportPageState extends State<CustomerSupportPage> {
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: Text('Success'),
-            content: Text('Your ticket has been submitted successfully.'),
+            title: const Text('Success'),
+            content: const Text('Your ticket has been submitted successfully.'),
             actions: [
               TextButton(
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
-                child: Text('OK'),
+                child: const Text('OK'),
               ),
             ],
           );
@@ -60,14 +60,14 @@ class _CustomerSupportPageState extends State<CustomerSupportPage> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: Text('Error'),
+          title: const Text('Error'),
           content: Text(message),
           actions: [
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: Text('OK'),
+              child: const Text('OK'),
             ),
           ],
         );
@@ -80,7 +80,7 @@ class _CustomerSupportPageState extends State<CustomerSupportPage> {
     print('CustomerSupportPage initialized with phone number: ${widget.phoneNumber}');
     return Scaffold(
       appBar: AppBar(
-        title: Text('Customer Support'),
+        title: const Text('Customer Support'),
         backgroundColor: const Color.fromARGB(255, 108, 105, 105),
         foregroundColor: Colors.white,
       ),
@@ -91,46 +91,46 @@ class _CustomerSupportPageState extends State<CustomerSupportPage> {
           children: [
             Text(
               'Welcome, ${widget.phoneNumber}',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.black),
+              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.black),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             TextField(
               controller: messageController,
-              style: TextStyle(color: Colors.black),
+              style: const TextStyle(color: Colors.black),
               decoration: InputDecoration(
                 labelText: 'Message',
-                labelStyle: TextStyle(color: Colors.black),
+                labelStyle: const TextStyle(color: Colors.black),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8.0),
                 ),
                 enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.black),
+                  borderSide: const BorderSide(color: Colors.black),
                   borderRadius: BorderRadius.circular(8.0),
                 ),
                 focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.blueAccent),
+                  borderSide: const BorderSide(color: Colors.blueAccent),
                   borderRadius: BorderRadius.circular(8.0),
                 ),
                 alignLabelWithHint: true,
                 hintText: 'Enter your message here',
-                hintStyle: TextStyle(color: Colors.black54),
+                hintStyle: const TextStyle(color: Colors.black54),
               ),
               maxLines: 5,
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Center(
               child: ElevatedButton(
                 onPressed: () => submitTicket(context),
                 style: ElevatedButton.styleFrom(
-                  padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
-                  textStyle: TextStyle(fontSize: 18),
+                  padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+                  textStyle: const TextStyle(fontSize: 18),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0),
                   ),
                   backgroundColor: Colors.black87,
                   foregroundColor: Colors.white,
                 ),
-                child: Text('Submit Ticket'),
+                child: const Text('Submit Ticket'),
               ),
             ),
           ],

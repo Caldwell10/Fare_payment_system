@@ -11,23 +11,24 @@ class MyTextfield extends StatelessWidget {
       required this.hintText,
       required this.obscureTest});
 
+  @override
   Widget build(BuildContext context) {
     return  Padding(
-      padding: EdgeInsets.symmetric(horizontal: 25.0),
+      padding: const EdgeInsets.symmetric(horizontal: 25.0),
       child: TextField(
         controller: controller,
         obscureText: obscureTest,
         decoration: InputDecoration(
-          enabledBorder: OutlineInputBorder(
+          enabledBorder: const OutlineInputBorder(
             borderSide: BorderSide(color: Colors.white),
           ),
-          focusedBorder: OutlineInputBorder(
+          focusedBorder: const OutlineInputBorder(
             borderSide: BorderSide(color: Colors.grey),
           ),
           fillColor: Colors.white70,
           filled: true,
           hintText: hintText,
-          hintStyle: TextStyle(color: Colors.grey)
+          hintStyle: const TextStyle(color: Colors.grey)
         ),
       ),
     );

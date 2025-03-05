@@ -29,7 +29,7 @@ class _ConductorHomePageState extends State<ConductorHomePage> {
             onPressed: () {
               FirebaseAuth.instance.signOut();
             },
-            icon: Icon(Icons.logout, color: Colors.white),
+            icon: const Icon(Icons.logout, color: Colors.white),
           ),
         ],
       ),
@@ -37,7 +37,7 @@ class _ConductorHomePageState extends State<ConductorHomePage> {
         crossAxisCount: 2,
         padding: const EdgeInsets.all(16.0),
         children: [
-          buildGridItem(context, 'View Transactions', Icons.receipt_long, ViewTransactionsPage()),
+          buildGridItem(context, 'View Transactions', Icons.receipt_long, const ViewTransactionsPage()),
         ],
       ),
       backgroundColor: const Color.fromARGB(255, 236, 239, 241), // Background color to contrast with the cards
@@ -54,15 +54,15 @@ class _ConductorHomePageState extends State<ConductorHomePage> {
       },
       child: Card(
         elevation: 5.0,
-        margin: EdgeInsets.all(10.0),
+        margin: const EdgeInsets.all(10.0),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15.0),
         ),
         child: Container(
-          padding: EdgeInsets.all(20.0),
+          padding: const EdgeInsets.all(20.0),
           decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [const Color.fromARGB(255, 108, 105, 105), const Color.fromARGB(255, 108, 105, 105)],
+            gradient: const LinearGradient(
+              colors: [Color.fromARGB(255, 108, 105, 105), Color.fromARGB(255, 108, 105, 105)],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),
@@ -73,10 +73,10 @@ class _ConductorHomePageState extends State<ConductorHomePage> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Icon(icon, size: 50.0, color: Colors.white),
-                SizedBox(height: 10.0),
+                const SizedBox(height: 10.0),
                 Text(
                   title,
-                  style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold, color: Colors.white),
+                  style: const TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold, color: Colors.white),
                   textAlign: TextAlign.center,
                 ),
               ],

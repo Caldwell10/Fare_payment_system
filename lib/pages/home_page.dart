@@ -25,7 +25,7 @@ class HomePage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 108, 105, 105),
+        backgroundColor: const Color.fromARGB(255, 108, 105, 105),
         title: const Text(
           'Farely',
           style: TextStyle(
@@ -37,7 +37,7 @@ class HomePage extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: signUserOut,
-            icon: Icon(Icons.logout, color: Colors.white),
+            icon: const Icon(Icons.logout, color: Colors.white),
           ),
         ],
       ),
@@ -45,9 +45,9 @@ class HomePage extends StatelessWidget {
         crossAxisCount: 2,
         padding: const EdgeInsets.all(16.0),
         children: [
-          buildGridItem(context, 'Routes', Icons.map, ViewRoutesPage()),
-          buildGridItem(context, 'Fare Calculation', Icons.calculate, FareCalculationPage()),
-          buildGridItem(context, 'Payment', Icons.payment, PaymentPage()),
+          buildGridItem(context, 'Routes', Icons.map, const ViewRoutesPage()),
+          buildGridItem(context, 'Fare Calculation', Icons.calculate, const FareCalculationPage()),
+          buildGridItem(context, 'Payment', Icons.payment, const PaymentPage()),
           buildGridItem(context, 'Customer Support', Icons.support_agent, CustomerSupportPage(phoneNumber: phoneNumber)),
         ],
       ),
@@ -65,14 +65,14 @@ class HomePage extends StatelessWidget {
       },
       child: Card(
         elevation: 5.0,
-        margin: EdgeInsets.all(10.0),
+        margin: const EdgeInsets.all(10.0),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10.0),
         ),
         child: Container(
-          padding: EdgeInsets.all(20.0),
+          padding: const EdgeInsets.all(20.0),
           decoration: BoxDecoration(
-            gradient: LinearGradient(
+            gradient: const LinearGradient(
               colors: [Color.fromARGB(255, 108, 105, 105), Color.fromARGB(255, 108, 105, 105)],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
@@ -84,10 +84,10 @@ class HomePage extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Icon(icon, size: 50.0, color: Colors.white),
-                SizedBox(height: 10.0),
+                const SizedBox(height: 10.0),
                 Text(
                   title,
-                  style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold, color: Colors.white),
+                  style: const TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold, color: Colors.white),
                   textAlign: TextAlign.center,
                 ),
               ],

@@ -18,7 +18,7 @@ class _CreateRoutesPageState extends State<CreateRoutePage> {
   final start = TextEditingController();
   final end = TextEditingController();
   bool isVisible = false;
-  List<LatLng> routePoints = [LatLng(-1.2921, 36.8219)];
+  List<LatLng> routePoints = [const LatLng(-1.2921, 36.8219)];
 
   @override
   void dispose() {
@@ -121,7 +121,7 @@ class _CreateRoutesPageState extends State<CreateRoutePage> {
                     width: double.infinity,
                     child: FlutterMap(
                       options: MapOptions(
-                        initialCenter: routePoints.isNotEmpty ? routePoints[0] : LatLng(-1.2921, 36.8219),
+                        initialCenter: routePoints.isNotEmpty ? routePoints[0] : const LatLng(-1.2921, 36.8219),
                         initialZoom: 14,
                       ),
                       children: [

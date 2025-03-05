@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class CreateMatatuPage extends StatefulWidget {
+  const CreateMatatuPage({super.key});
+
   @override
   _CreateMatatuPageState createState() => _CreateMatatuPageState();
 }
@@ -16,7 +18,7 @@ class _CreateMatatuPageState extends State<CreateMatatuPage> {
 
     if (name.isEmpty || number.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Please enter both name and number')),
+        const SnackBar(content: Text('Please enter both name and number')),
       );
       return;
     }
@@ -29,7 +31,7 @@ class _CreateMatatuPageState extends State<CreateMatatuPage> {
       });
 
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Matatu created successfully')),
+        const SnackBar(content: Text('Matatu created successfully')),
       );
 
       nameController.clear();
@@ -45,7 +47,7 @@ class _CreateMatatuPageState extends State<CreateMatatuPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Create Matatu'),
+        title: const Text('Create Matatu'),
         backgroundColor: const Color.fromARGB(255, 108, 105, 105),
         foregroundColor: Colors.white,
       ),
@@ -60,10 +62,10 @@ class _CreateMatatuPageState extends State<CreateMatatuPage> {
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8.0),
                 ),
-                prefixIcon: Icon(Icons.directions_bus),
+                prefixIcon: const Icon(Icons.directions_bus),
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             TextField(
               controller: numberController,
               decoration: InputDecoration(
@@ -71,22 +73,22 @@ class _CreateMatatuPageState extends State<CreateMatatuPage> {
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8.0),
                 ),
-                prefixIcon: Icon(Icons.confirmation_number),
+                prefixIcon: const Icon(Icons.confirmation_number),
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             ElevatedButton(
               onPressed: _createMatatu,
               style: ElevatedButton.styleFrom(
-                padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
-                textStyle: TextStyle(fontSize: 18),
+                padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+                textStyle: const TextStyle(fontSize: 18),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10.0),
                 ),
                 backgroundColor: const Color.fromARGB(255, 108, 105, 105),
                 foregroundColor: Colors.white,
               ),
-              child: Text('Create Matatu'),
+              child: const Text('Create Matatu'),
             ),
           ],
         ),

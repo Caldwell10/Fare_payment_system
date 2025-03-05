@@ -11,7 +11,7 @@ class MpesaService {
 
   Future<String> _getAccessToken() async {
     try {
-      final String auth = 'Basic ' + base64Encode(utf8.encode('$consumerKey:$consumerSecret'));
+      final String auth = 'Basic ${base64Encode(utf8.encode('$consumerKey:$consumerSecret'))}';
       print('Authorization Header: $auth'); 
       final http.Response response = await http.get(Uri.parse(authUrl), headers: {'Authorization': auth});
 

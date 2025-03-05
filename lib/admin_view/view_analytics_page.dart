@@ -1,4 +1,3 @@
-import 'dart:ui';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -53,7 +52,7 @@ class ViewAnalyticsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Analytics'),
+        title: const Text('Analytics'),
         backgroundColor: const Color.fromARGB(255, 108, 105, 105),
         foregroundColor: Colors.white,
       ),
@@ -61,11 +60,11 @@ class ViewAnalyticsPage extends StatelessWidget {
         future: _fetchAnalytics(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else if (!snapshot.hasData) {
-            return Center(child: Text('No data available'));
+            return const Center(child: Text('No data available'));
           }
 
           var analytics = snapshot.data!;
@@ -77,11 +76,11 @@ class ViewAnalyticsPage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                const Text(
                   'Analytics Overview',
                   style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Card(
                   elevation: 4,
                   shape: RoundedRectangleBorder(
@@ -91,18 +90,18 @@ class ViewAnalyticsPage extends StatelessWidget {
                     padding: const EdgeInsets.all(16.0),
                     child: Row(
                       children: [
-                        Icon(Icons.person, size: 40, color: Colors.orange),
-                        SizedBox(width: 10),
+                        const Icon(Icons.person, size: 40, color: Colors.orange),
+                        const SizedBox(width: 10),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
+                            const Text(
                               'Total Users Registered',
                               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                             ),
                             Text(
                               '$totalUsers',
-                              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.blue),
+                              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.blue),
                             ),
                           ],
                         ),
@@ -110,14 +109,14 @@ class ViewAnalyticsPage extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Card(
                   elevation: 4,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
+                  child: const Padding(
+                    padding: EdgeInsets.all(16.0),
                     child: Row(
                       children: [
                         Icon(Icons.directions_bus, size: 40, color: Colors.blue),
@@ -130,7 +129,7 @@ class ViewAnalyticsPage extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Expanded(
                   child: ListView.builder(
                     itemCount: transactionsPerMatatu.length,
@@ -141,7 +140,7 @@ class ViewAnalyticsPage extends StatelessWidget {
                       var transactions = transactionsPerMatatu[matatuId]['transactions'] as List<Map<String, dynamic>>;
 
                       return Card(
-                        margin: EdgeInsets.symmetric(vertical: 8),
+                        margin: const EdgeInsets.symmetric(vertical: 8),
                         elevation: 3,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
@@ -149,7 +148,7 @@ class ViewAnalyticsPage extends StatelessWidget {
                         child: ExpansionTile(
                           title: Text(
                             'Matatu ID: $matatuId',
-                            style: TextStyle(fontWeight: FontWeight.bold),
+                            style: const TextStyle(fontWeight: FontWeight.bold),
                           ),
                           subtitle: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -160,7 +159,7 @@ class ViewAnalyticsPage extends StatelessWidget {
                           ),
                           children: transactions.map((transaction) {
                             return ListTile(
-                              leading: Icon(Icons.person, size: 40, color: Colors.black),
+                              leading: const Icon(Icons.person, size: 40, color: Colors.black),
                               title: Text('Phone Number: ${transaction['phoneNumber']}'),
                               subtitle: Text('Time: ${transaction['timestamp'].toDate()}'),
                             );

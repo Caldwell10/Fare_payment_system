@@ -29,18 +29,18 @@ class ViewRoutesPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('View Routes'),
+        title: const Text('View Routes'),
       ),
       body: FutureBuilder<List<Polyline>>(
         future: _fetchRoutes(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
-            return Center(child: Text('Error loading routes'));
+            return const Center(child: Text('Error loading routes'));
           } else {
             return FlutterMap(
-              options: MapOptions(
+              options: const MapOptions(
                 initialCenter: LatLng(-1.2921, 36.8219),
                 initialZoom: 13,
               ),

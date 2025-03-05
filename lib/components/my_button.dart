@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class MyButton extends StatelessWidget {
   final Function()? onTap;
@@ -22,8 +21,8 @@ class MyButton extends StatelessWidget {
         }
       },
       child: Container(
-        padding: EdgeInsets.all(25),
-        margin: EdgeInsets.symmetric(
+        padding: const EdgeInsets.all(25),
+        margin: const EdgeInsets.symmetric(
           horizontal: 25,
         ),
         decoration: BoxDecoration(
