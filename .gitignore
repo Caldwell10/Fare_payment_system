@@ -41,3 +41,4 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+fraud_detection_api/fare-payment-system-firebase-admin-services.json
